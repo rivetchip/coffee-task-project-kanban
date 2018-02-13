@@ -67,13 +67,19 @@
             
             categoriesList.innerHTML = '';
             categoriesList.classList.remove('categories-list-loading');
+
+            var categories = response.categories;
+            var xisPermissionEdit = response.permissionEdit;
             
-            for( var index in response ) {
+            for( var index in categories ) {
                 
-                var category = response[index];
+                var category = categories[index];
                 var categoryId = category.id;
 
                 category.color = categoryId %5;//samir
+
+                // add permission
+                category.xisPermissionEdit = xisPermissionEdit;
 
                 appendTemplate('category', categoriesList, category);
                 
@@ -239,6 +245,10 @@
                 
                 var category = response.category;
                 var categoryId = category.id;
+                var xisPermissionEdit = response.permissionEdit;
+
+                // add permission
+                category.xisPermissionEdit = xisPermissionEdit;
                 
                 // append category template
                 
@@ -559,12 +569,12 @@
         .on('ready', function( value ) { // set value on open
             var xmoment = this.getMoment();
             var value = xmoment.add(1, 'hour').format(dateFormat);
-            
+
             this.setValue(value);
         })
-        .on('day', onDatepickerChangeData)
-        .on('time', onDatepickerChangeData);
-        //.on('data', onDatepickerChangeData);
+        //.on('day', onDatepickerChangeData) // value : day
+        //.on('time', onDatepickerChangeData) // value : time
+        .on('data', onDatepickerChangeData);
         
         // open modal ; via create buttons on categories list
         

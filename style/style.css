@@ -778,6 +778,9 @@ nav#panel .menu-mentions a:hover {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+
+    width: 100%;
+    text-align: center;
 }
 .page-dashboard .category-tasks-addbutton-container {
     display: flex;

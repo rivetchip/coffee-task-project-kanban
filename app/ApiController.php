@@ -339,9 +339,16 @@ class ApiController extends AbstractController {
                 return $this->apiError('CannotAction');
             }
 
+            $permissionEdit = false;
+
+            // check persmission edit category
+            if( $this->canAction('category', 'update', $projectId) ) {
+                $permissionEdit = true;
+            }
+
             $categories = ProjectsModel::findCategories($projectId);
 
-            return json($categories);
+            return json(['categories' => $categories, 'permissionEdit' => $permissionEdit]);
         }
 
         return $this->apiError('ProjectNotExist');
@@ -423,7 +430,14 @@ class ApiController extends AbstractController {
 
             $attributes = $category->getAttributes();
 
-            return json(['message'=>'ok', 'category'=>$attributes]);
+            $permissionEdit = false;
+
+            // check persmission edit category
+            if( $this->canAction('category', 'update', $projectId) ) {
+                $permissionEdit = true;
+            }
+
+            return json(['message'=>'ok', 'category' => $attributes, 'permissionEdit' => $permissionEdit]);
         }
 
         return $this->apiError('CategoryNotCreated');

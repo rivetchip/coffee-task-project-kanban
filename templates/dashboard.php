@@ -159,36 +159,39 @@
     <div id="category-{{ id }}" class="component-category category-color-{{ color }}" data-id="{{ id }}">
 
         <div class="category-header">
-            <div class="category-icon"></div>
+
             <div class="category-title">{{ &title }}</div>
 
-            <div class="category-dropdown dropdown" tabindex="1">
-                <!-- <input class="dropdown-check" id="check-dropdown{{ id }}" type="checkbox"> -->
-                <label class="category-menu" for="check-dropdown{{ id }}"></label>
-                <div class="category-menu-panel dropdown-menu">
-                    <a class="category-menu-item button-category-edit-popover" data-category="{{ id }}">Editer</a>
-                    <a class="category-menu-item button-category-delete" data-category="{{ id }}">Supprimer</a> 
-                </div>
-            </div>
-
-            <div id="category-popover-{{ id }}" class="component-category-popover component-category-popover-edit ha-popover">
-                <div class="connector"></div>
-
-                <form class="category-popover-form ha-popover-form" action="">
-
-                    <div class="category-popover-title">
-                        Modifier cette catégorie :
+            {{ ?xisPermissionEdit }}
+                <div class="category-dropdown dropdown" tabindex="1">
+                    <!-- <input class="dropdown-check" id="check-dropdown{{ id }}" type="checkbox"> -->
+                    <label class="category-menu" for="check-dropdown{{ id }}"></label>
+                    <div class="category-menu-panel dropdown-menu">
+                        <a class="category-menu-item button-category-edit-popover" data-category="{{ id }}">Editer</a>
+                        <a class="category-menu-item button-category-delete" data-category="{{ id }}">Supprimer</a> 
                     </div>
+                </div>
 
-                    <input placeholder="Titre" id="category-field-title" name="title"  type="text">
+                <div id="category-popover-{{ id }}" class="component-category-popover component-category-popover-edit ha-popover">
+                    <div class="connector"></div>
 
-                    <footer class="category-popover-footer ha-footer">
-                        <button class="category-popover-button button-category-cancel ha-button" data-category="{{ id }}">Annuler</button> 
-                        <button class="category-popover-button button-category-save ha-button" data-category="{{ id }}">Valider</button> 
-                    </footer>
+                    <form class="category-popover-form ha-popover-form" action="">
 
-                </form>
-            </div>
+                        <div class="category-popover-title">
+                            Modifier cette catégorie :
+                        </div>
+
+                        <input placeholder="Titre" id="category-field-title" name="title"  type="text">
+
+                        <footer class="category-popover-footer ha-footer">
+                            <button class="category-popover-button button-category-cancel ha-button" data-category="{{ id }}">Annuler</button> 
+                            <button class="category-popover-button button-category-save ha-button" data-category="{{ id }}">Valider</button> 
+                        </footer>
+
+                    </form>
+                </div>
+            {{/}}
+
         </div><!--category header-->
 
 
